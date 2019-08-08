@@ -11,9 +11,10 @@ from Insta.models import InstaUser, Like, Post, UserConnection, Comment
 class HelloWorld(TemplateView):
     template_name = 'test.html'
 
-class PostsView(ListView):
+class PostsView(LoginRequiredMixin,ListView):
     model = Post
     template_name = 'index.html'
+    login_url = 'login'
 
     def get_queryset(self):
         current_user = self.request.user

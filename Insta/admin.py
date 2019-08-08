@@ -16,7 +16,17 @@ class UserAdmin(admin.ModelAdmin):
         FollowingInline,
     ]
 
+class CommentInline(admin.StackedInline):
+    model = Comment
 
+class LikeInline(admin.StackedInline):
+    model = Like
+
+class PostAdmin(admin.ModelAdmin):
+    inlines = [
+        CommentInline,
+        LikeInline,
+    ]
 
 # Register your models here.
 admin.site.register(Post)

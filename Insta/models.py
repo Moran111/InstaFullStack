@@ -74,6 +74,9 @@ class Post(models.Model):
         editable=False,
     )
 
+    def get_comment_count(self):
+        return self.comments.count()
+
     def get_like_count(self):
         return self.likes.count()
 

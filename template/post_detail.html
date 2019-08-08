@@ -26,12 +26,29 @@
                         {{ object.get_like_count }} like{% if object.get_like_count > 1 %}s{% endif %}
                     {% endif %}
                 </div>
-                </div<div class="timestamp">
+                <div class="timestamp">
                     {{ object.posted_on|timesince }}
                 </div>
+            </div>
+            <ul class="comment-list">
+                {% for comment in object.comments.all %}
+                <li class="comment-list__comment">
+                    <a href="{% url 'user_detail' comment.user.pk %}" class="user">
+                        {{ comment.user.username }}
+                    </a>
+                    <span class="comment">{{ comment.comment }}</span>
+                </li>
+                {% endfor %}
+            </ul>
 
             <section class="input-row">
-                <i class="fa {% has_user_liked_post object user %} submit-like" aria-hidden="true"></i>
+                <i class="fa {% if liked %}fa-heart{% else %}fa-heart-o{% endif %} submit-like" aria-hidden="true"></i>
+                <div class="comment-input-wrapper">
+                    <input class="add-comment" type="text" placeholder="Add a comment...">
+                </div>
+                <div class="hidden-data {{ object.pk }}" style="display: none;">
+                    <span class="post-pk">{{ object.pk }}</span>
+                </div>
             </section>
         </div>
     </div>
