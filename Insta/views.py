@@ -14,7 +14,7 @@ class HelloWorld(TemplateView):
 class PostsView(LoginRequiredMixin,ListView):
     model = Post
     template_name = 'index.html'
-    login_url = 'login'
+    login_url = 'signup'
 
     def get_queryset(self):
         current_user = self.request.user
